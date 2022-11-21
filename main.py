@@ -7,13 +7,13 @@ print(img.shape) # Print image shape
 cv2.imshow("original", img)
  
 # Cropping an image
-cropped_image = img[80:280, 150:330]
+cropped_image = img[100:210, 410:730]
  
 # Display cropped image
 cv2.imshow("cropped", cropped_image)
  
 # Save the cropped image
-cv2.imwrite("Cropped Image.jpg", cropped_image)
+cv2.imwrite("croped_img/Cropped Image.jpg", cropped_image)
  
 cv2.waitKey(0)
 cv2.destroyAllWindows()
