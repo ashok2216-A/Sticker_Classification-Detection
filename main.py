@@ -25,7 +25,7 @@ for i in range(len(os.listdir(datadir))):
     lot_img=cv2.rectangle(img_array,lot_axis,lot_box,(255,0,0),2)
     qty_img=cv2.rectangle(img_array,qty_axis,qty_box,(0,255,0),2)
     symbol_img1=cv2.rectangle(img_array,symbol_axis1,symbols_box1,(255,55,0),2)
-    symbol_img2=cv2.rectangle(img_array,symbol_axis2,symbols_box2,(50,0,255),2)
+    symbol_img2=cv2.rectangle(img_array,symbol_axis2,symbols_box2,(0,205,100),2)
 
     cropped_image = img_array[100:210, 410:730]
     cv2.imwrite("img.jpg" .format(i), img)
