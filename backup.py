@@ -52,16 +52,18 @@ for i in range(len(os.listdir(datadir))):
         #     crop_img = img_array[y:y+h, x:x+w]
         # else:
         #     print('Correct Type!')
-        if img_type == 'lot':
+        if img_type == 'ref':
+            img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(55,0,255),2)
+        elif img_type == 'lot':
             img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,0,255),2)
         elif img_type == 'device':
             img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,0,0),2)
-        elif img_type == 'ref':
-            img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,255,0),2)
         elif img_type == 'qty':
             img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,55,0),2)
-        elif img_type == 'symbol':
-            img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,205,100),2)
+        elif img_type == 'symbol1':
+            img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,0,0),2)
+        elif img_type == 'symbol2':
+            img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,255,0),2)
         else:
             print('Correct Type!')
         boxed_img = cv2.imwrite("boxed_img{}.jpg" .format(i), img)
@@ -69,12 +71,12 @@ for i in range(len(os.listdir(datadir))):
         y=y+8
         crop_img = img_array[y:y+h, x:x+w]
         return crop_img, img, boxed_img
-
-    cropped_lot_img = crop(180,200,220,70, img_type='lot')
+    cropped_ref_img = crop(680,560,920,180, img_type='ref')
+    cropped_lot_img = crop(180,220,220,70, img_type='lot')
     cropped_device_img = crop(310,100,280,50, img_type='device')
-    cropped_ref_img = crop(220,320,380,160, img_type='ref')
+    cropped_symbol1_img = crop(120,320,680,140, img_type='symbol1')
     cropped_qty_img = crop(1080,220,980,110, img_type='qty')
-    cropped_symbol_img = crop(980,220,920,110, img_type='symbol')
+    cropped_symbol2_img = crop(680,560,920,180, img_type='symbol2')
 
     cv2.imwrite("cropped_ref_img.jpg", cropped_ref_img[0])
     cv2.imwrite("Image_output\device\cropped_device_img.jpg",cropped_device_img)
