@@ -12,7 +12,7 @@ for i in range(len(os.listdir(datadir))):
     path = os.path.join(datadir,filename)
     print(path)
     img_path = path
-    # img_array = cv2.imread(img_path)
+
     img_array = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
     # print('Original Dimensions : ',img_array.shape)
     
@@ -24,19 +24,39 @@ for i in range(len(os.listdir(datadir))):
     # resize image
     img_array = cv2.resize(img_array, dim, interpolation = cv2.INTER_AREA)
     
-    # print('Resized Dimensions : ',img_array.shape)
-    # ref_axis, ref_box = 
-    # device_axis, device_box = ((370,180),(270+380,110+8))
-    # lot_axis, lot_box = ((220,320),(100+380,210+160))
-    # qty_axis, qty_box = ((1080,220),(280+980,210+110))
-    # symbol_axis1, symbols_box1 = ((1060,220),(320+920,10+110))
-    # symbol_axis2, symbols_box2 = ((140,420),(300+430,210+420))
     def crop(x, y, w, h, img_type):
-        if img_type == 'ref':
-            img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,255,255),2)
+        # if img_type == 'ref':
+        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,255,255),2)
+        #     x=x+15
+        #     y=y+1
+        #     crop_img = img_array[y:y+h, x:x+w]
+        # elif img_type == 'device':
+        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,0,0),2)
+        #     x=x+1
+        #     y=y+1
+        #     crop_img = img_array[y:y+h, x:x+w]
+        # elif img_type == 'lot':
+        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,255,0),2)
+        #     x=x+1
+        #     y=y+1
+        #     crop_img = img_array[y:y+h, x:x+w]
+        # elif img_type == 'qty':
+        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,55,0),2)
+        #     x=x+1
+        #     y=y+1
+        #     crop_img = img_array[y:y+h, x:x+w]
+        # elif img_type == 'symbol':
+        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,205,100),2)
+        #     x=x+1
+        #     y=y+1
+        #     crop_img = img_array[y:y+h, x:x+w]
+        # else:
+        #     print('Correct Type!')
+        if img_type == 'lot':
+            img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,0,255),2)
         elif img_type == 'device':
             img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,0,0),2)
-        elif img_type == 'lot':
+        elif img_type == 'ref':
             img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,255,0),2)
         elif img_type == 'qty':
             img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,55,0),2)
@@ -50,12 +70,12 @@ for i in range(len(os.listdir(datadir))):
         crop_img = img_array[y:y+h, x:x+w]
         return crop_img, img, boxed_img
 
-    cropped_ref_img = crop(210,280,380,110, img_type='ref')
-    cropped_device_img = crop(370,180,380,8, img_type='device')
-    cropped_lot_img = crop(220,320,380,160, img_type='lot')
+    cropped_lot_img = crop(180,200,220,70, img_type='lot')
+    cropped_device_img = crop(310,100,280,50, img_type='device')
+    cropped_ref_img = crop(220,320,380,160, img_type='ref')
     cropped_qty_img = crop(1080,220,980,110, img_type='qty')
-    cropped_symbol_img = crop(1060,220,920,110, img_type='symbol')
-    # print(cropped_ref_img[0])
+    cropped_symbol_img = crop(980,220,920,110, img_type='symbol')
+
     cv2.imwrite("cropped_ref_img.jpg", cropped_ref_img[0])
     cv2.imwrite("Image_output\device\cropped_device_img.jpg",cropped_device_img)
     cv2.imwrite("Image_output\lot\cropped_lot_img.jpg",cropped_lot_img)
