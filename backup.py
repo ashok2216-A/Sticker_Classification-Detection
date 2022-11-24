@@ -32,7 +32,7 @@ for i in range(len(os.listdir(datadir))):
         elif img_type == 'device':
             img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,0,0),2)
         elif img_type == 'qty':
-            img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,55,0),2)
+            img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,255,10),2)
         elif img_type == 'symbol1':
             img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,55,100),2)
         elif img_type == 'symbol2':
@@ -48,14 +48,15 @@ for i in range(len(os.listdir(datadir))):
     cropped_lot_img = crop(180,220,220,70, img_type='lot')
     cropped_device_img = crop(310,100,280,50, img_type='device')
     cropped_symbol1_img = crop(120,320,680,140, img_type='symbol1')
-    cropped_qty_img = crop(1080,220,980,110, img_type='qty')
-    cropped_symbol2_img = crop(680,560,920,180, img_type='symbol2')
+    cropped_qty_img = crop(820,160,280,120, img_type='qty')
+    cropped_symbol2_img = crop(800,80,200,80, img_type='symbol2')
 
     cv2.imwrite("cropped_ref_img.jpg", cropped_ref_img[0])
-    cv2.imwrite("Image_output\device\cropped_device_img.jpg",cropped_device_img)
-    cv2.imwrite("Image_output\lot\cropped_lot_img.jpg",cropped_lot_img)
-    cv2.imwrite("Image_output\qty\cropped_qty_img.jpg", cropped_qty_img)
-    cv2.imwrite("Image_output\symbols\cropped_symbol_img.jpg", cropped_symbol1_img)
+    cv2.imwrite("Image_output\device\cropped_device_img.jpg",cropped_device_img[0])
+    cv2.imwrite("Image_output\lot\cropped_lot_img.jpg",cropped_lot_img[0])
+    cv2.imwrite("Image_output\qty\cropped_qty_img.jpg", cropped_qty_img[0])
+    cv2.imwrite("Image_output\symbols\cropped_symbol_img.jpg", cropped_symbol1_img[0])
+    cv2.imwrite("Image_output\symbols\cropped_symbol_img.jpg", cropped_symbol2_img[0])
     # cv2.imwrite("croped_img/Cropped_Image{}.jpg" .format(i), cropped_image)
     # cv2.imshow('output_img.jpg', img_arr)
     # plt.show()
