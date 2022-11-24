@@ -25,33 +25,6 @@ for i in range(len(os.listdir(datadir))):
     img_array = cv2.resize(img_array, dim, interpolation = cv2.INTER_AREA)
     
     def crop(x, y, w, h, img_type):
-        # if img_type == 'ref':
-        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,255,255),2)
-        #     x=x+15
-        #     y=y+1
-        #     crop_img = img_array[y:y+h, x:x+w]
-        # elif img_type == 'device':
-        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,0,0),2)
-        #     x=x+1
-        #     y=y+1
-        #     crop_img = img_array[y:y+h, x:x+w]
-        # elif img_type == 'lot':
-        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,255,0),2)
-        #     x=x+1
-        #     y=y+1
-        #     crop_img = img_array[y:y+h, x:x+w]
-        # elif img_type == 'qty':
-        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(255,55,0),2)
-        #     x=x+1
-        #     y=y+1
-        #     crop_img = img_array[y:y+h, x:x+w]
-        # elif img_type == 'symbol':
-        #     img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(0,205,100),2)
-        #     x=x+1
-        #     y=y+1
-        #     crop_img = img_array[y:y+h, x:x+w]
-        # else:
-        #     print('Correct Type!')
         if img_type == 'ref':
             img=cv2.rectangle(img_array,(x,y),(x+w,y+h),(55,0,255),2)
         elif img_type == 'lot':
@@ -79,10 +52,11 @@ for i in range(len(os.listdir(datadir))):
     cropped_symbol2_img = crop(680,560,920,180, img_type='symbol2')
 
     cv2.imwrite("cropped_ref_img.jpg", cropped_ref_img[0])
-    cv2.imwrite("Image_output\device\cropped_device_img.jpg",cropped_device_img)
-    cv2.imwrite("Image_output\lot\cropped_lot_img.jpg",cropped_lot_img)
-    cv2.imwrite("Image_output\qty\cropped_qty_img.jpg", cropped_qty_img)
-    cv2.imwrite("Image_output\symbols\cropped_symbol_img.jpg", cropped_symbol_img)
+    cv2.imwrite("cropped_device_img.jpg",cropped_device_img[0])
+    cv2.imwrite("cropped_lot_img.jpg",cropped_lot_img[0])
+    cv2.imwrite("cropped_qty_img.jpg", cropped_qty_img[0])
+    cv2.imwrite("cropped_symbol_img.jpg", cropped_symbol1_img[0])
+    cv2.imwrite("cropped_symbol_img.jpg", cropped_symbol2_img[0])
     # cv2.imwrite("croped_img/Cropped_Image{}.jpg" .format(i), cropped_image)
     # cv2.imshow('output_img.jpg', img_arr)
     # plt.show()
