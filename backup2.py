@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import pytesseract
+from openpyxl import Workbook
 
 
 datadir = 'images'
@@ -51,42 +52,41 @@ for i in range(len(os.listdir(datadir))):
     cv2.imwrite("Image_output\device\cropped_device_img{}.jpg" .format(i), cropped_device_img[0])
     cv2.imwrite("Image_output\lot\cropped_lot_img{}.jpg" .format(i), cropped_lot_img[0])
     cv2.imwrite("Image_output\qty\cropped_qty_img{}.jpg" .format(i), cropped_qty_img[0])
-    cv2.imwrite("Image_output\symbols\cropped_symbol_img{}.jpg" .format(i), cropped_symbol1_img[0])
-    cv2.imwrite("Image_output\symbols\cropped_symbol_img{}.jpg" .format(i), cropped_symbol2_img[0])
+    cv2.imwrite("Image_output\symbols1\cropped_symbol_img{}.jpg" .format(i), cropped_symbol1_img[0])
+    cv2.imwrite("Image_output\symbols2\cropped_symbol_img{}.jpg" .format(i), cropped_symbol2_img[0])
     # cv2.imshow('output_img.jpg', img_arr)
     # plt.show()
     dir_file = ['Ref', 'lot', 'qty', 'device']
     # image_path = 'Image_output'+'/'+dir_file[i]+'/cropped_'+dir_file[i]+'_img{}.jpg'
     # print(image_path)
-    for ls in range(len(dir_file)):
-        for bs in range(4):
-            img = cv2.imread('Image_output'+'/'+dir_file[ls]+'/cropped_'+dir_file[bs]+'_img{}.jpg' .format(bs))
+    # for ls in range(len(dir_file)):
+    #     for bs in range(4):
+    ref_img = cv2.imread('Image_output/Ref/cropped_Ref_img{}.jpg' .format(i))
+    lot_img = cv2.imread('Image_output/lot/cropped_lot_img{}.jpg' .format(i))
+    qty_img = cv2.imread('Image_output/qty/cropped_qty_img{}.jpg' .format(i))
+    device_img = cv2.imread('Image_output/device/cropped_device_img{}.jpg' .format(i))
             # print(img)
         # print(img)
     pytesseract.pytesseract.tesseract_cmd = r'C:\Users\HP\AppData\Local\Tesseract-OCR\tesseract.exe'
 
-    text = pytesseract.image_to_string(img)
-    print(text)
-    # img1 = cv2.imread('sample.jpg')
-    # img2 = cv2.imread('sample2.jpg')
-    
-    # orb = cv2.ORB_create(nfeatures=500)
-    # kp1, des1 = orb.detectAndCompute(img1, None)
-    # kp2, des2 = orb.detectAndCompute(img2, None)
-    
-    # bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-    # matches = bf.match(des1, des2)
-    
-    # matches = sorted(matches, key=lambda x: x.distance)
-    
-    # match_img = cv2.drawMatches(img1, kp1, img2, kp2, matches[:50], None)
-    
-    # cv2.imshow(match_img)
-    # cv2.waitKey()
-# dir_file = ['Ref', 'lot', 'qty', 'device']
-# for i in range(len(dir_file)):
-#     image_path = 'Image_output'+'/'+dir_file[i]+'/cropped_'+dir_file[i]+'_img{}.jpg'
-#     print(image_path)
+    ref_text = pytesseract.image_to_string(ref_img)
+    print(ref_text)
+    lot_text = pytesseract.image_to_string(lot_img)
+    print(lot_text)
+    qty_text = pytesseract.image_to_string(qty_img)
+    print(qty_text)
+    device_text = pytesseract.image_to_string(device_img)
+    print(device_text)
+
+    fruits = ['Apple','Peach','Cherry','Watermelon']
+    sales = [100,200,300,400]
+
+    row_start = 3  #start below the header row 2
+    col_start = 2  #starts from column B
+    for i in range(0,len(fruits)):
+        ws1.cell(row_start+i, col_start).value = fruits[i]
+        ws1.cell(row_start+i, col_start+1).value = sales[i]
+
 import cv2
 dir_file = ['Ref', 'lot', 'qty', 'device']
     # image_path = 'Image_output'+'/'+dir_file[i]+'/cropped_'+dir_file[i]+'_img{}.jpg'
